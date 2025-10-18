@@ -102,11 +102,11 @@
                             <div class="col-md-6">
                                 <div class="form-group mt-2">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="admin-baseline-market-operation" id="admin-baseline-market-operation" value="0" @if($baseline_settings['market-operation']==0 ?? true) checked @endif>
+                                        <input class="form-check-input" type="radio" name="admin-baseline-market-operation" id="admin-baseline-market-operation" value="0" @if(($baseline_settings['market-operation'] ?? 0) == 0) checked @endif>
                                         <label class="form-check-label" for="admin-baseline-market-operation"><i class="fas fa-arrow-down"></i>{{ trans('buyback::global.admin_group_table_jita') }}</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="admin-baseline-market-operation" id="admin-baseline-market-operation-2" value="1" @if($baseline_settings['market-operation']==1 ?? false) checked @endif>
+                                        <input class="form-check-input" type="radio" name="admin-baseline-market-operation" id="admin-baseline-market-operation-2" value="1" @if(($baseline_settings['market-operation'] ?? 1) == 0) checked @endif>
                                         <label class="form-check-label" for="admin-baseline-market-operation-2"><i class="fas fa-arrow-up"></i>{{ trans('buyback::global.admin_group_table_jita') }}</label>
                                     </div>
                                 </div>
