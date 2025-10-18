@@ -44,6 +44,7 @@ class BuybackItemController extends Controller {
     {
         return view('buyback::buyback_item', [
             'marketConfigs' => BuybackMarketConfig::orderBy('typeName', 'asc')->get(),
+            'baseline_settings' => setting('seat_buyback_baseline_price_settings', true)
         ]);
     }
 
@@ -98,5 +99,25 @@ class BuybackItemController extends Controller {
 
         return redirect()->back()
             ->with('success', trans('buyback::global.admin_success_market_remove'));
+    }
+
+    public function addBaselineMarketConfig(Request $request)
+    {
+        $request->validate([
+            'admin-baseline-item-price' => 'string|in:on',
+            'admin-baseline-market-operation'    => 'required',
+            'admin-baseline-market-percentage'   => 'required|integer',
+        ]);
+
+        $new_settings = [
+            'enable-baseline-price' => (bool)$request->get('admin-baseline-item-price') ?? false,
+            'market-operation' => (int)$request->get('admin-baseline-market-operation'),
+            'market-percentage' => (int)$request->get('admin-baseline-market-percentage')
+        ];
+
+        setting(['seat_buyback_baseline_price_settings', $new_settings],true);
+
+        return redirect()->back()
+            ->with('success', trans('buyback::global.admin_success_baseline_settings'));
     }
 }

@@ -78,11 +78,17 @@ class ItemService
     private function categorizeItems(array $itemData): ?array
     {
         $parsedItems = [];
+
+        $baseline_settings = setting('seat_buyback_baseline_price_settings', true);
+        $baseline_enabled = $baseline_settings['enable-baseline-price'] ?? false;
+        $baseline_market_operation = $baseline_settings['market-operation'] ?? 0;
+        $baseline_percentage = $baseline_settings['market-percentage'] ?? 1;
+
         foreach ($itemData as $key => $item) {
 
             $result = DB::table('invTypes as it')
                 ->join('invGroups as ig', 'it.groupID', '=', 'ig.GroupID')
-                ->rightJoin('buyback_market_config as bmc', 'it.typeID', '=', 'bmc.typeId')
+                ->leftJoin('buyback_market_config as bmc', 'it.typeID', '=', 'bmc.typeId')
                 ->select(
                     'it.typeID as typeID',
                     'it.typeName as typeName',
@@ -95,7 +101,7 @@ class ItemService
                 ->where('it.typeName', '=', $key)
                 ->first();
 
-            if (empty($result)) {
+            if (($result->percentage == null && $result->marketOperationType==null) && !$baseline_enabled) {
 
                 $parsedItems["ignored"][] = [
                     'ItemId' => $item["typeID"],
@@ -107,7 +113,6 @@ class ItemService
             }
 
             if (!array_key_exists($result->groupID, $parsedItems)) {
-
                 $parsedItems["parsed"][$key]["typeId"] = $item["typeID"];
                 $parsedItems["parsed"][$key]["typeName"] = $item["name"];
                 $parsedItems["parsed"][$key]["typeQuantity"] = $item["quantity"];
@@ -116,8 +121,8 @@ class ItemService
                 $parsedItems["parsed"][$key]["marketGroupName"] = $result->groupName;
 
                 $parsedItems["parsed"][$key]["marketConfig"] = [
-                    'percentage' => $result->percentage != null ? $result->percentage : 0,
-                    'marketOperationType' => $result->marketOperationType != null ? $result->marketOperationType : 0
+                    'percentage' => $result->percentage != null ? $result->percentage : ($baseline_enabled ? $baseline_percentage : 0),
+                    'marketOperationType' => $result->marketOperationType != null ? $result->marketOperationType : ($baseline_enabled ? $baseline_market_operation : 0)
                 ];
             }
         }

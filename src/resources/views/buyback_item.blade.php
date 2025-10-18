@@ -78,6 +78,69 @@
                 </form>
             </div>
         </div>
+
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ trans('buyback::global.baseline_item_settings') }}</h3>
+                </div>
+                <form action="{{ route('buyback.item.market.baseline') }}" method="post">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="item-baseline-price">{{ trans('buyback::global.item_baseline_price_label') }}</label>
+                            <div class="col-md-6">
+                                <input type="checkbox" class="form-control" name="admin-baseline-item-price" id="item-baseline-price" @if($baseline_settings['enable-baseline-price'] ?? false) checked @endif>
+                                <p class="form-text text-muted mb-0">
+                                    {{ trans('buyback::global.item_baseline_price_description') }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="admin-baseline-market-operation"><i class="fas fa-arrow-down"></i>/<i class="fas fa-arrow-up"></i>{{ trans('buyback::global.admin_item_jita_label') }}</label>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="admin-baseline-market-operation" id="admin-baseline-market-operation" value="0" @if($baseline_settings['market-operation']==0 ?? true) checked @endif>
+                                        <label class="form-check-label" for="admin-baseline-market-operation"><i class="fas fa-arrow-down"></i>{{ trans('buyback::global.admin_group_table_jita') }}</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="admin-baseline-market-operation" id="admin-baseline-market-operation-2" value="1" @if($baseline_settings['market-operation']==1 ?? false) checked @endif>
+                                        <label class="form-check-label" for="admin-baseline-market-operation-2"><i class="fas fa-arrow-up"></i>{{ trans('buyback::global.admin_group_table_jita') }}</label>
+                                    </div>
+                                </div>
+                                <p class="form-text text-muted mb-0">
+                                    {{ trans('buyback::global.admin_item_jita_description') }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="admin-baseline-market-percentage">{{ trans('buyback::global.admin_item_percentage_label') }}</label>
+                            <div class="col-md-6">
+                                <input name="admin-baseline-market-percentage" id="admin-baseline-market-percentage" type="number" class="form-control w-25" min="1" max="100" value="{{ $baseline_settings['market-percentage'] ?? 1 }}" maxlength="2">
+                                <p class="form-text text-muted mb-0">
+                                    {{ trans('buyback::global.admin_item_percentage_description') }}
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label" for="submit"></label>
+                            <div class="col-md-4">
+                                <button id="submit" type="submit" class="btn btn-success">
+                                    <i class="fas fa-check"></i>
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">

@@ -40,19 +40,24 @@ class PriceCalculationHelper {
 
         $marketConfig = BuybackMarketConfig::where('typeId', $typeId)->first();
 
-        if($marketConfig == null) {
+        $baseline_settings = setting('seat_buyback_baseline_price_settings', true);
+        $baseline_enabled = $baseline_settings['enable-baseline-price'] ?? false;
+        $baseline_market_operation = $baseline_settings['market-operation'] ?? 0;
+        $baseline_percentage = $baseline_settings['market-percentage'] ?? 1;
+
+        if($marketConfig == null && !$baseline_enabled) {
             return null;
         }
 
-        if($marketConfig->price > 0) {
+        if($marketConfig !== null && $marketConfig->price > 0) {
             return $quantity * $marketConfig->price;
         }
 
         $priceSum = $quantity * $buybackPriceData->getItemPrice();
 
-        $pricePercentage = $priceSum * $marketConfig->percentage / 100;
+        $pricePercentage = $priceSum * ($marketConfig!=null ? $marketConfig->percentage : $baseline_percentage) / 100;
 
-        return $marketConfig->marketOperationType ? $priceSum + $pricePercentage : $priceSum - $pricePercentage;
+        return ($marketConfig!=null ? $marketConfig->marketOperationType: $baseline_market_operation) ? $priceSum + $pricePercentage : $priceSum - $pricePercentage;
     }
 
     /**

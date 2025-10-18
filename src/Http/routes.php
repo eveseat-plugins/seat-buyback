@@ -84,6 +84,11 @@ Route::group([
                     Route::get('/removeMarketConfig/{typeId}')
                         ->name('buyback.item.market.remove')
                         ->uses('BuybackItemController@removeMarketConfig');
+
+                    // Update default market config
+                    Route::post('/baseline')
+                        ->name('buyback.item.market.baseline')
+                        ->uses('BuybackItemController@addBaselineMarketConfig');
                 });
 
             Route::prefix('/admin')

@@ -119,5 +119,9 @@ return [
     'my_contracts_open_title' => 'Open Contracts',
     'my_contracts_open_error' => 'No open contracts found',
     'my_contracts_closed_title' => 'Closed Contracts',
-    'my_contracts_closed_error' => 'No closed contracts found'
+    'my_contracts_closed_error' => 'No closed contracts found',
+    'baseline_item_settings' => 'Baseline Settings',
+    'item_baseline_price_label' => 'Enable Baseline price',
+    'item_baseline_price_description' => 'Buy any item at a baseline price if no other price is specified for this item.',
+    'admin_success_baseline_settings' => 'Baseline settings successfully updated.'
 ];
