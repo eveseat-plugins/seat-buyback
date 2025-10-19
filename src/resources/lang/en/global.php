@@ -105,7 +105,7 @@ return [
     'admin_item_price_label' => 'Price (ISK)',
     'admin_item_price_description' => 'If you set a price this price will be taken for the calculation and the percentage will be ignored',
     'admin_item_jita_label' => 'Jita',
-    'admin_item_jita_description' => 'Choose if you want to set the percentage value under or above Jita. (Example: 5% under Jita = 95% of the item price)',
+    'admin_item_jita_description' => 'Choose if you want to set the percentage value under or above Jita buy. (Example: 5% under Jita buy = 95% of the item price)',
     'admin_error_config' => 'There is already a config for Id: ',
     'admin_success_config' => 'Admin config successfully updated.',
     'admin_success_market_add' => 'Market config successfully added.',
