@@ -43,7 +43,7 @@ class BuybackItemController extends Controller {
     public function getHome()
     {
         return view('buyback::buyback_item', [
-            'marketConfigs' => BuybackMarketConfig::orderBy('typeName', 'asc')->get(),
+            'marketConfigs' => BuybackMarketConfig::with('group','type')->orderBy('typeId', 'asc')->get(),
             'baseline_settings' => setting('seat_buyback_baseline_price_settings', true)
         ]);
     }
@@ -72,10 +72,8 @@ class BuybackItemController extends Controller {
 
         BuybackMarketConfig::insert([
             'typeId' => (int)$request->get('admin-market-typeId'),
-            'typeName' => (string)$invType->typeName,
             'marketOperationType' => (int)$request->get('admin-market-operation'),
             'groupId' => (int)$invType->groupID,
-            'groupName' => (string)$invType->group->groupName,
             'percentage' => (int)$request->get('admin-market-percentage'),
             'price' => (int)$request->get("admin-market-price")
         ]);

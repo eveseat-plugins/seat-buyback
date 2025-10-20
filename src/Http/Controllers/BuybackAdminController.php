@@ -54,7 +54,6 @@ class BuybackAdminController extends Controller
     {
         return view('buyback::buyback_admin', [
             'settings' => $this->settingsService->getAll(),
-            'marketConfigs' => BuybackMarketConfig::orderBy('typeName', 'asc')->get(),
             'priceProvider' => BuyBackPriceProvider::orderBy('name', 'asc')->get()
         ]);
     }

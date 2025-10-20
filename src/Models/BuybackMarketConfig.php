@@ -24,6 +24,8 @@ namespace H4zz4rdDev\Seat\SeatBuyback\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Seat\Eveapi\Models\Sde\InvGroup;
+use Seat\Eveapi\Models\Sde\InvType;
 
 /**
  * Class BuybackMarketConfig
@@ -59,4 +61,14 @@ class BuybackMarketConfig extends Model {
      * @var array
      */
     protected $guarded = [];
+
+    public function type()
+    {
+        return $this->belongsTo(InvType::class,'typeId','typeID');
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(InvGroup::class,'groupId','groupID');
+    }
 }

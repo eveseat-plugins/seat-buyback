@@ -164,11 +164,11 @@
                                 <tr>
                                     <form action="{{ route('buyback.item.market.remove', ['typeId' => $config->typeId]) }}" method="get" id="admin-market-config-remove" name="admin-market-config-remove">
                                         {{ csrf_field() }}
-                                    <td class="align-middle">{{ $config->typeName}}</td>
+                                    <td class="align-middle">{{ $config->type->typeName}}</td>
                                     <td class="text-center align-middle">{!! $config->marketOperationType == 0 ? '<i class="fas fa-arrow-down"></i>' : '<i class="fas fa-arrow-up"></i>' !!}</td>
                                     <td class="text-center align-middle">{{ ($config->price <= 0) ? $config->percentage . " %" : "-" }}</td>
                                     <td class="text-center align-middle">{{ ($config->price > 0) ? number_format($config->price,0,',', '.') . " ISK" : "-"}}</td>
-                                    <td class="align-middle">{{ $config->groupName }}</td>
+                                    <td class="align-middle">{{ $config->group->groupName }}</td>
                                     <td class="text-center mb-4 mt-4 align-middle"><button class="btn btn-danger btn-xs form-control" id="submit" type="submit"><i class="fas fa-trash-alt"></i>{{ trans('buyback::global.admin_group_table_button') }}</button></td>
                                     </form>
                                 </tr>
