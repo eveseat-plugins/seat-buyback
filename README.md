@@ -47,42 +47,7 @@ Example:
 ![discordexample](https://i.imgur.com/Y3BExAi.png)
 
 ## Quick Installation Guide:
-I can also recommend reading through the [official seat documentation](https://eveseat.github.io/docs/community_packages/).
-### Install
-Switch to your seat installation directory ( default : /var/www/seat)
-
-```shell
-sudo -H -u www-data bash -c 'php artisan down'
-sudo -H -u www-data bash -c 'composer require h4zz4rddev/seat-buyback'
-sudo -H -u www-data bash -c 'php artisan vendor:publish --force --all'
-sudo -H -u www-data bash -c 'php artisan migrate'
-sudo -H -u www-data bash -c 'php artisan seat:cache:clear'
-sudo -H -u www-data bash -c 'php artisan config:cache'
-sudo -H -u www-data bash -c 'php artisan route:cache'
-sudo -H -u www-data bash -c 'php artisan up'
-```
-*Note that `www-data` is the default ubuntu webserver user. If you are running on a different distribution please adjust the user.
-### Docker Install
-Open your .env file and edit the SEAT_PLUGINS variable to include the package.
-```
-# SeAT Plugins
-SEAT_PLUGINS=h4zz4rddev/seat-buyback
-```
-After adding the plugin to your .env file run:
-```
-docker-compose up -d
-```
-The plugin should be installed after docker has finished booting.
-
-## Update
-To update the plugin to the newest version you can follow the same installation steps but change the composer command to:
-```shell
-sudo -H -u www-data bash -c 'composer update h4zz4rddev/seat-buyback'
-```
-
-## Donations
-Donations are always welcome, although not required. If you end up using this module a lot, I'd appreciate a donation.
-You can give ISK or contract PLEX and Ships to `H4zz4rd`.
+Instructions on how to install this plugin can be found in the [official seat documentation](https://eveseat.github.io/docs/community_packages/).
 
 
 
