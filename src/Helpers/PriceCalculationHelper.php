@@ -40,7 +40,7 @@ class PriceCalculationHelper {
 
         $marketConfig = BuybackMarketConfig::where('typeId', $typeId)->first();
 
-        $baseline_settings = setting('seat_buyback_baseline_price_settings', true);
+        $baseline_settings = (array)setting('seat_buyback_baseline_price_settings', true);
         $baseline_enabled = $baseline_settings['enable-baseline-price'] ?? false;
         $baseline_market_operation = $baseline_settings['market-operation'] ?? 0;
         $baseline_percentage = $baseline_settings['market-percentage'] ?? 1;

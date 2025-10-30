@@ -37,14 +37,12 @@ use Seat\Web\Http\Controllers\Controller;
  */
 class BuybackItemController extends Controller {
 
-    /**
-     * @return View
-     */
     public function getHome()
     {
+        $baseline_settings = (array)setting('seat_buyback_baseline_price_settings', true);
         return view('buyback::buyback_item', [
             'marketConfigs' => BuybackMarketConfig::with('group','type')->orderBy('typeId', 'asc')->get(),
-            'baseline_settings' => setting('seat_buyback_baseline_price_settings', true)
+            'baseline_settings' => $baseline_settings
         ]);
     }
 
