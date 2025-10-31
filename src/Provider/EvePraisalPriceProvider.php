@@ -56,6 +56,14 @@ class EvePraisalPriceProvider extends AbstractEvePriceProvider implements IPrice
 
         $prices = $this->getPriceData($itemTypeId, $this->name);
 
+        foreach ($prices["summaries"] as $location) {
+            if($location["market_name"] == "jita") {
+                return new BuybackPriceData(
+                    $itemTypeId,
+                    $location["prices"]["buy"]["percentile"]
+                );
+            }
+        }
         return new BuybackPriceData(
             $itemTypeId,
             $prices["summaries"][0]["prices"]["buy"]["percentile"]
